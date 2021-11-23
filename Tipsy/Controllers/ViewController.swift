@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     @IBAction func tipChanged(_ sender: UIButton) {
         
         
-        billTextField.endEditing(true)
+        billTextField.endEditing(true) // to dismiss the keyboard
         
         zeroPctButton.isSelected = false
         tenPctButton.isSelected = false
@@ -48,6 +48,25 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
+        
+        let bill = billTextField.text!
+        if bill != "" {
+            billTotal = Double(bill)!
+            let result = billTotal * (1 + tip) / Double(numberOfPeople)
+            finalResult = String(format: "%.2f", result)
+        }
+        self.performSegue(withIdentifier: "goToResults", sender: self)
+    }
+        
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "goToResults" {
+            
+            let destinationVC = segue.destination as! ResultsViewController
+            destinationVC.result = finalResult
+            destinationVC.tip = Int(tip * 100)
+            destinationVC.split = numberOfPeople
+        }
     }
     
 }
