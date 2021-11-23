@@ -17,12 +17,26 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var splitNumberLabel: UILabel!
     
-    @IBAction func tipChanged(_ sender: Any) {
+    @IBAction func tipChanged(_ sender: UIButton) {
+        
+        
+        billTextField.endEditing(true)
+        
+        zeroPctButton.isSelected = false
+        tenPctButton.isSelected = false
+        twentyPctButton.isSelected = false
+        sender.isSelected = true //to make pressed button appear selected
+        
+        let buttonTitle = sender.currentTitle!
+        let buttonTitleMinusPercentSign =  String(buttonTitle.dropLast())
+        let buttonTitleAsANumber = Double(buttonTitleMinusPercentSign)!
+
+        
     }
-    @IBAction func stepperValueChanged(_ sender: Any) {
+    @IBAction func stepperValueChanged(_ sender: UIStepper) {
     }
     
-    @IBAction func calculatePressed(_ sender: Any) {
+    @IBAction func calculatePressed(_ sender: UIButton) {
     }
     
 }
